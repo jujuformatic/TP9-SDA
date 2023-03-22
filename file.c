@@ -13,10 +13,10 @@ if (fileVide(ptrF))
     {
     return 0;
     }
-    if (ptrF->Tete==MAX-1)
-        ptrF->Tete=-1;
-    ptrF->Tete++;
     affecterElt(ptrE, &(ptrF->Elts[ptrF->Tete]));
+        ptrF->Tete++;
+    if (ptrF->Tete==MAX)
+        ptrF->Tete=0;
 return 1;
 }
 
@@ -25,10 +25,15 @@ int ajouter(T_File *ptrF,T_Elt *ptrE) // si espace libre, ajout en queue
     if (filePleine(ptrF)){
     return 0;
     }
-    if (ptrF->Queue==MAX-1)
-        ptrF->Queue=-1;
+        if (ptrF->Queue==-1)
+        ptrF->Tete=0;
+
     ptrF->Queue++;
-    affecterElt(&(ptrF->Elts[ptrF->Queue]),ptrE);
+    if (ptrF->Queue==MAX)
+        ptrF->Queue=0;
+    ptrF->Elts[ptrF->Queue]=*ptrE;
+
+
 return 1;
 } 
 
@@ -41,25 +46,13 @@ return 0;
 
 int filePleine(const  T_File *ptrF) // qd MAX elts dans la file 
 {
-    if (ptrF->Queue>ptrF->Tete)
-    {
-        if (ptrF->Queue+ptrF->Tete==8)
+    if (abs(ptrF->Queue+1)%MAX==ptrF->Tete)
             return 1;
-        return 0;
-    }
-    else
-    {
-        if (ptrF->Tete-ptrF->Queue==1)
-        return 1;
-    }
     return 0;
 }
 
 T_Elt  premier(T_File *ptrF) //valeur en tete de file
 {
-    if (ptrF->Tete==-1){
-        return  ptrF->Elts[ptrF->Tete+1];
-    }
 return  ptrF->Elts[ptrF->Tete];
 }
 
@@ -69,13 +62,13 @@ void afficherFile(T_File *ptrF)
     i= ptrF->Tete;
     while(i!= ptrF->Queue)
     {
-        i++;
         afficherElt(&(ptrF->Elts[i]));
-        if ((i==MAX-1) && (MAX-1 != ptrF->Queue))
-            i=-1;
-
+        i=(i+1)%MAX;
+        if (i==MAX )
+            if(MAX!=ptrF->Queue+1) 
+                i=0;
     }
-
+    afficherElt(&(ptrF->Elts[i]));
 }
 
 
