@@ -70,15 +70,24 @@ void testFile(T_File *fi){
 		saisirElt(&x);
 		ajouter(fi,&x);
 	}
+	printf("affichage file ");
 	afficherFile(fi);
 	if (filePleine(fi))
 		printf(" \n file pleine");
+	printf("  \n défiler");
 	retirer(fi,&x);
 	afficherElt(&x);
 	if (filePleine(fi))
 		printf(" \n file pleine \n");
-	else
-		printf("file non pleine \n");
+	if (fileVide(fi))
+		printf(" \n file non pleine \n");
+	printf(" \n défiler");
+	retirer(fi,&x);
+	afficherElt(&x);
+	printf("\najout\n");
+	saisirElt(&x);
+	ajouter(fi,&x);
+	afficherFile(fi);
 }
 
 void testPile(T_Pile *pile){
