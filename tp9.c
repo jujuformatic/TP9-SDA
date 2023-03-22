@@ -54,27 +54,41 @@ int main()
 	return 0;
 }
 
-void testFile(T_File *fi)
-{
+void testFile(T_File *fi){
 	T_Elt x;
 	int i;
-	initFile(fi);
+	initFile( fi);
 	if (fileVide(fi))
 		printf("file vide \n");
-	for (i = 0; i < 10; i++)
+	for(i=0;i<10;i++)
 	{
 		saisirElt(&x);
-		ajouter(fi, &x);
+		ajouter(fi,&x);
 	}
+	printf("affichage file ");
 	afficherFile(fi);
 	if (filePleine(fi))
 		printf(" \n file pleine");
-	retirer(fi, &x);
+	printf("  \n défiler");
+	retirer(fi,&x);
 	afficherElt(&x);
 	if (filePleine(fi))
 		printf(" \n file pleine \n");
-	else
-		printf("file non pleine \n");
+	if (fileVide(fi))
+		printf(" \n file non pleine \n");
+	printf(" \n défiler");
+	retirer(fi,&x);
+	afficherElt(&x);
+	printf("\najout\n");
+	saisirElt(&x);
+	ajouter(fi,&x);
+	printf("\najout\n");
+	saisirElt(&x);
+	ajouter(fi,&x);
+	printf("affichage");
+	afficherFile(fi);
+	if (filePleine(fi))
+		printf(" \n file pleine \n");
 }
 
 void testPile(T_Pile *pile)
