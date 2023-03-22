@@ -3,14 +3,15 @@
 #include "pile.h"
 #include "file.h"
 
+void testFile(T_File *fi);
 
 int menu()
 {
 
 int choix;
 printf("\n\n\n SDA1 TP9");
-printf("\n\n\n 1 : tester mon fichier file.c");
-printf("\n 2 : tester mon fichier pile.c");
+printf("\n\n\n 1 : tester mon fichier Pile.c");
+printf("\n 2 : tester mon fichier File.c");
 printf("\n 3 : afficher et compter les permutations d'une chaine");
 printf("\n 4 : afficher et compter les solutions pour un échiquier ");
 printf("\n 0 :  QUITTER  ");
@@ -33,11 +34,10 @@ chx=menu();
 switch (chx)
 	{
 	case 1 :  
-		//testez toutes vos fonctions par un jeu de test de votre choix
 		//testPile(&mapile); //TP9 partie 1 : à ecrire 
 		break;
 	case 2 : //testez toutes vos fonctions par un jeu de test de votre choix
-		// testFile(&mafile); //TP9 partie 1 : à ecrire 
+		testFile(&mafile); //TP9 partie 1 : à ecrire 
 		break; 
 	case 3 : 
 		//scanf("%s",chaine); //une chaine de longueur <=MAX
@@ -55,4 +55,26 @@ switch (chx)
 
 printf("\nau plaisir de vous revoir ...\n");
 return 0;
+}
+
+void testFile(T_File *fi){
+	T_Elt x;
+	int i;
+	initFile( fi);
+	if (fileVide(fi))
+		printf("file vide \n");
+	for(i=0;i<10;i++)
+	{
+		saisirElt(&x);
+		ajouter(fi,&x);
+	}
+	afficherFile(fi);
+	if (filePleine(fi))
+		printf(" \n file pleine");
+	retirer(fi,&x);
+	afficherElt(&x);
+	if (filePleine(fi))
+		printf(" \n file pleine \n");
+	else
+		printf("file non pleine \n");
 }
