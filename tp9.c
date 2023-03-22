@@ -4,6 +4,7 @@
 #include "file.h"
 
 void testFile(T_File *fi);
+void testPile(T_Pile *fi);
 
 int menu()
 {
@@ -35,6 +36,7 @@ switch (chx)
 	{
 	case 1 :  
 		//testPile(&mapile); //TP9 partie 1 : à ecrire 
+		testPile(&mapile);
 		break;
 	case 2 : //testez toutes vos fonctions par un jeu de test de votre choix
 		testFile(&mafile); //TP9 partie 1 : à ecrire 
@@ -77,4 +79,34 @@ void testFile(T_File *fi){
 		printf(" \n file pleine \n");
 	else
 		printf("file non pleine \n");
+}
+
+void testPile(T_Pile *pile){
+	T_Elt x;
+	int i;
+
+	initPile(pile);
+	if (pilevide(pile)) printf("Pile vide \n");
+
+	for(i=0;i<10;i++)
+	{
+		saisirElt(&x);
+		empiler(pile,x);
+	}
+	printf("\nPile saisie:");
+	afficherPile(pile);
+
+	if (pilepleine(pile)) printf(" \nPile pleine");
+	else printf("\nPile non pleine \n");
+
+	printf("\nDernier élément dépilé:");
+	depiler(pile,&x);
+	afficherElt(&x);
+	if (pilepleine(pile)) printf(" \nPile pleine \n");
+	else printf("\nPile non pleine \n");
+
+	printf("\nSommet de la pile:");
+	x=sommet(pile);
+	afficherElt(&x);
+	printf("\nHauteur de la pile: %d", hauteur(pile));
 }
