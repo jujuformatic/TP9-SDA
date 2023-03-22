@@ -54,7 +54,8 @@ int main()
 	return 0;
 }
 
-void testFile(T_File *fi){
+void testFile(T_File *fi)
+{
 	T_Elt x;
 	int i;
 	initFile( fi);
@@ -133,18 +134,11 @@ int permut(T_Pile *adrP, char* chaine){
 	char premiereLettre;
 	T_Elt trash;
 
-	//T_Elt eltTab[MAX];
-
 	if(strcmp("", chaine)==0) return 0;
 
 	premiereLettre=chaine[0];
 
-	while(chaine[i]!='\0'){
-		//elt=chaine[i];
-		//eltTab[i]=elt;
-		i++;
-	}
-	tailleChaine=i;
+	tailleChaine=strlen(chaine);
 
 	initPile(adrP);
 
